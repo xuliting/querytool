@@ -1,7 +1,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-        <title>查询小工具</title>
+        <title>查询工具</title>
         <style>
             .wrap{
                 margin:0 auto;
@@ -161,9 +161,7 @@
 
     const getnowUnixtimestamp = () => {
         var nowtime = Math.round(new Date().getTime() / 1000)
-        return getfetch(nowtime).then(res => {
-            document.getElementById("result").innerHTML = res
-        })
+        document.getElementById("result").innerHTML = nowtime
     }
 
     const converttimestamptobeijingtime = () => {
@@ -173,10 +171,8 @@
             return
         }
 
-        getconverttimestamptobeijingtime(timestamp)
-            .then(res => {
-                document.getElementById("result").innerHTML = res
-            })
+        var unixTimestamp = new Date(timestamp * 1000)
+        document.getElementById("result").innerHTML = unixTimestamp.toLocaleString()
     }
 
     const convertbeijingtimetotimestamp = () => {
@@ -185,10 +181,8 @@
             alert(" please input beijing time! Example:2015/06/23 08:00:20 ")
             return
         }
-        getconvertbeijingtimetotimestamp(beijingtime)
-            .then(res => {
-                document.getElementById("result").innerHTML = res
-            })
+        var oldTime = (new Date(beijingtime)).getTime() / 1000;
+        document.getElementById("result").innerHTML = oldTime
     }
 
     const encode = () => {
@@ -216,7 +210,6 @@
     }
 
 </script>
-
 <body>
 
 <div class="wrap">
@@ -246,14 +239,10 @@
         <button type="button" onclick="queryelavotehistory()">查询某地址的投票历史</button>
         <button type="button" onclick="querydposvotehistory()">查询某个节点的投票详情</button>
         <button type="button" onclick="queryheightdposvotehistory()">查询某个区块的投票排名</button>
-        <br/>
-                                                                   
-        <h1>App ID 创建和验签</h1>
-        <button type="button" onclick="window.open('https://zuohuahua.github.io/Elastos.Tools.Creator.Capsule/');">创建和验签</button>
-        <br/>
-                                                                                                                  
+        <br />
+
         <h1>常用工具</h1>
-        <h3>时间戳转换（精确到秒）</h3>
+        <h3>时间戳转换（精确到秒） </h3>
         <button type="button" onclick="getnowUnixtimestamp()">获取当前Unix时间戳</button>
         <p>北京时间or时间戳: <textarea id="inputtime" style="width:280px; height:20px;" row="1"></textarea> </p>
         <button type="button" onclick="converttimestamptobeijingtime()">Unix时间戳转换成北京时间</button>
@@ -265,7 +254,7 @@
         <button type="button" onclick="encode()">UrlEncode编码</button>
         <button type="button" onclick="decode()">UrlDecode解码</button>
 
-        <h1>继续</h1>
+        <h1>TODO</h1>
 
 
     </aside>
