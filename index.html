@@ -120,44 +120,44 @@
             })
     }
 
-        const queryelavotehistory = () => {
-            var elaaddress = document.getElementById("inputdpos").value
-            if (elaaddress == "") {
-                alert("please input the ELA address!")
-                return
-            }
-
-            getelavotehistory(elaaddress)
-                .then(res => {
-                    document.getElementById("result").innerHTML = res
-                })
+    const queryelavotehistory = () => {
+        var elaaddress = document.getElementById("inputdpos").value
+        if (elaaddress == "") {
+            alert("please input the ELA address!")
+            return
         }
 
-        const querydposvotehistory = () => {
-            var dpospublickey = document.getElementById("inputdpos").value
-            if (dpospublickey == "") {
-                alert("please input the publickey of DPoS node!")
-                return
-            }
+        getelavotehistory(elaaddress)
+            .then(res => {
+                document.getElementById("result").innerHTML = res
+            })
+    }
 
-            getdposvotehistory(dpospublickey)
-                .then(res => {
-                    document.getElementById("result").innerHTML = res
-                })
+    const querydposvotehistory = () => {
+        var dpospublickey = document.getElementById("inputdpos").value
+        if (dpospublickey == "") {
+            alert("please input the publickey of DPoS node!")
+            return
         }
 
-        const queryheightdposvotehistory = () => {
-            var height = document.getElementById("inputdpos").value
-            if (height == "") {
-                alert("please input the height of Elastos Blockchain!")
-                return
-            }
+        getdposvotehistory(dpospublickey)
+            .then(res => {
+                document.getElementById("result").innerHTML = res
+            })
+    }
 
-            getheightdposvotehistory(height)
-                .then(res => {
-                    document.getElementById("result").innerHTML = res
-                })
+    const queryheightdposvotehistory = () => {
+        var height = document.getElementById("inputdpos").value
+        if (height == "") {
+            alert("please input the height of Elastos Blockchain!")
+            return
         }
+
+        getheightdposvotehistory(height)
+            .then(res => {
+                document.getElementById("result").innerHTML = res
+            })
+    }
 
     const getnowUnixtimestamp = () => {
         var nowtime = Math.round(new Date().getTime() / 1000)
@@ -261,7 +261,7 @@
         <button type="button" onclick="encode()">UrlEncode编码</button>
         <button type="button" onclick="decode()">UrlDecode解码</button>
 
-        <h1>TODO</h1>
+        <h1>继续</h1>
 
 
     </aside>
