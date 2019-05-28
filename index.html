@@ -178,7 +178,7 @@
     const convertbeijingtimetotimestamp = () => {
         var beijingtime = document.getElementById("inputtime").value
         if (beijingtime == "") {
-            alert(" please input beijing time! Example:2015/06/23 08:00:20 ")
+            alert(" please input beijing time! Example:2019/05/28 10:00:20 ")
             return
         }
         var oldTime = (new Date(beijingtime)).getTime() / 1000;
@@ -191,10 +191,7 @@
             alert(" please input URL scheme")
             return
         }
-        getfetch(encodeURIComponent(url))
-            .then(res => {
-                document.getElementById("result").innerHTML = res
-            })
+        document.getElementById("result").innerHTML = encodeURIComponent(url)
     }
 
     const decode = () => {
@@ -203,10 +200,7 @@
             alert(" please input URL scheme")
             return
         }
-        getfetch(decodeURIComponent(url))
-            .then(res => {
-                document.getElementById("result").innerHTML = res
-            })
+        document.getElementById("result").innerHTML = decodeURIComponent(url)
     }
 
 </script>
@@ -248,14 +242,12 @@
         <button type="button" onclick="converttimestamptobeijingtime()">Unix时间戳转换成北京时间</button>
         <button type="button" onclick="convertbeijingtimetotimestamp()">北京时间转换成Unix时间戳</button>
 
-
         <h3>编码转换</h3>
         <p>Url: <textarea id="inputcode" style="width:500px; height:210px;" row="1"></textarea> </p>
         <button type="button" onclick="encode()">UrlEncode编码</button>
         <button type="button" onclick="decode()">UrlDecode解码</button>
 
-        <h1>TODO</h1>
-
+        <h1>其他</h1>
 
     </aside>
     <section id="right">
