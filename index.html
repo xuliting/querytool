@@ -161,7 +161,7 @@
 
     const getnowUnixtimestamp = () => {
         var nowtime = Math.round(new Date().getTime() / 1000)
-        return getfetch(nowtime).then(res => {
+        return nowtime.then(res => {
             document.getElementById("result").innerHTML = res
         })
     }
