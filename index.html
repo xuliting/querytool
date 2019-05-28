@@ -1,0 +1,275 @@
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+        <title>链查询工具</title>
+        <style>
+            .wrap{
+                margin:0 auto;
+                width:100%;
+            }
+            #left{
+                width:550px;
+                height:0 auto;
+                background: #e5ebb3;
+                float: left;
+            }
+            #right{
+                height:0 auto;
+                background: #cab8b8;
+                margin-left:550px;
+            }
+        </style>
+</head>
+
+<script src="query.js".js"></script>
+<script type="text/javascript">
+
+    const queryelabalance = () => {
+        var elaaddress = document.getElementById("elaaddress").value
+        if (elaaddress == "") {
+            alert("please input the ELA address!")
+            return
+        }
+
+        getelabalance(elaaddress)
+            .then(res => {
+            document.getElementById("result").innerHTML = res
+        })
+    }
+
+    const querytxhistory = () => {
+        var elaaddress = document.getElementById("elaaddress").value
+        if (elaaddress == "") {
+            alert("please input the ELA address!")
+            return
+        }
+
+        gettxhistory(elaaddress)
+            .then(res => {
+                document.getElementById("result").innerHTML = res
+            })
+    }
+
+    const querydidbalance = () => {
+        var elaaddress = document.getElementById("elaaddress").value
+        if (elaaddress == "") {
+            alert("please input the ELA address!")
+            return
+        }
+
+        getdidbalance(elaaddress)
+            .then(res => {
+                document.getElementById("result").innerHTML = res
+            })
+    }
+
+    const querydidtxhistory = () => {
+        var elaaddress = document.getElementById("elaaddress").value
+        if (elaaddress == "") {
+            alert("please input the ELA address!")
+            return
+        }
+
+        getdidtxhistory(elaaddress)
+            .then(res => {
+                document.getElementById("result").innerHTML = res
+            })
+    }
+
+    const querydidlatestInfo = () => {
+        var did = document.getElementById("did").value
+        if (did == "") {
+            alert("please input did!")
+            return
+        }
+
+        getdidlatestInfo(did)
+            .then(res => {
+                document.getElementById("result").innerHTML = res
+            })
+    }
+
+    const queryPublicKeyhistory = () => {
+        var did = document.getElementById("did").value
+        if (did == "") {
+            alert("please input did!")
+            return
+        }
+
+        getdidattributehistory(did, "PublicKey")
+            .then(res => {
+                document.getElementById("result").innerHTML = res
+            })
+    }
+
+    const querydidattributehistory = () => {
+        var did = document.getElementById("did").value
+        if (did == "") {
+            alert("please input did!")
+            return
+        }
+
+        var attribute = document.getElementById("attribute").value
+        if (attribute == "") {
+            alert("please input attribute!")
+            return
+        }
+        getdidattributehistory(did, attribute)
+            .then(res => {
+                document.getElementById("result").innerHTML = res
+            })
+    }
+
+        const queryelavotehistory = () => {
+            var elaaddress = document.getElementById("inputdpos").value
+            if (elaaddress == "") {
+                alert("please input the ELA address!")
+                return
+            }
+
+            getelavotehistory(elaaddress)
+                .then(res => {
+                    document.getElementById("result").innerHTML = res
+                })
+        }
+
+        const querydposvotehistory = () => {
+            var dpospublickey = document.getElementById("inputdpos").value
+            if (dpospublickey == "") {
+                alert("please input the publickey of DPoS node!")
+                return
+            }
+
+            getdposvotehistory(dpospublickey)
+                .then(res => {
+                    document.getElementById("result").innerHTML = res
+                })
+        }
+
+        const queryheightdposvotehistory = () => {
+            var height = document.getElementById("inputdpos").value
+            if (height == "") {
+                alert("please input the height of Elastos Blockchain!")
+                return
+            }
+
+            getheightdposvotehistory(height)
+                .then(res => {
+                    document.getElementById("result").innerHTML = res
+                })
+        }
+
+    const getnowUnixtimestamp = () => {
+        var nowtime = Math.round(new Date().getTime() / 1000)
+        return getfetch(nowtime).then(res => {
+            document.getElementById("result").innerHTML = res
+        })
+    }
+
+    const converttimestamptobeijingtime = () => {
+        var timestamp = document.getElementById("inputtime").value
+        if (timestamp == "") {
+            alert("please input Unix timestamp!")
+            return
+        }
+
+        getconverttimestamptobeijingtime(timestamp)
+            .then(res => {
+                document.getElementById("result").innerHTML = res
+            })
+    }
+
+    const convertbeijingtimetotimestamp = () => {
+        var beijingtime = document.getElementById("inputtime").value
+        if (beijingtime == "") {
+            alert(" please input beijing time! Example:2015/06/23 08:00:20 ")
+            return
+        }
+        getconvertbeijingtimetotimestamp(beijingtime)
+            .then(res => {
+                document.getElementById("result").innerHTML = res
+            })
+    }
+
+    const encode = () => {
+        var url = document.getElementById("inputcode").value
+        if (url == "") {
+            alert(" please input URL scheme")
+            return
+        }
+        getfetch(encodeURIComponent(url))
+            .then(res => {
+                document.getElementById("result").innerHTML = res
+            })
+    }
+
+    const decode = () => {
+        var url = document.getElementById("inputcode").value
+        if (url == "") {
+            alert(" please input URL scheme")
+            return
+        }
+        getfetch(decodeURIComponent(url))
+            .then(res => {
+                document.getElementById("result").innerHTML = res
+            })
+    }
+
+</script>
+
+<body>
+
+<div class="wrap">
+    <aside id="left">
+        <h1>常用查询</h1>
+        <p>ELA地址: <textarea id="elaaddress" style="width:280px; height:20px;" row="1"></textarea></p>
+
+        <button type="button" onclick="queryelabalance()">查询ELA余额</button>
+        <button type="button" onclick="querytxhistory()">查询交易历史</button>
+        <button type="button" onclick="querydidbalance()">查询ID链余额</button>
+        <button type="button" onclick="querydidtxhistory()">查询ID链交易历史</button>
+        <br/>
+
+        <h1>交易查询</h1>
+        <button type="button" onclick="window.open('https://api-wallet-ela.elastos.org/api/1/list');">查询主链交易</button>
+        <button type="button" onclick="window.open('https://api-wallet-did.elastos.org/api/1/list');">查询ID链交易</button>
+        <br/>
+
+        <h1>DID 信息查询</h1>
+        <p>DID: <textarea id="did" style="width:280px; height:20px;" row="1"></textarea> 属性: <textarea id="attribute" style="width:150px; height:20px;" row="1"></textarea> </p>
+        <button type="button" onclick="querydidlatestInfo()">查询所有属性</button>
+        <button type="button" onclick="queryPublicKeyhistory()">查询PublicKey上链历史</button>
+        <button type="button" onclick="querydidattributehistory()">查询属性历史</button>
+
+        <h1>DPoS投票查询</h1>
+        <p>输入: <textarea id="inputdpos" style="width:470px; height:20px;" row="1"></textarea></p>
+        <button type="button" onclick="queryelavotehistory()">查询某地址的投票历史</button>
+        <button type="button" onclick="querydposvotehistory()">查询某个节点的投票详情</button>
+        <button type="button" onclick="queryheightdposvotehistory()">查询某个区块的投票排名</button>
+        <br />
+
+        <h1>常用工具</h1>
+        <h3>时间戳转换</h3>
+        <button type="button" onclick="getnowUnixtimestamp()">获取当前Unix时间戳</button>
+        <p>北京时间or时间戳: <textarea id="inputtime" style="width:280px; height:20px;" row="1"></textarea> </p>
+        <button type="button" onclick="converttimestamptobeijingtime()">Unix时间戳转换成北京时间</button>
+        <button type="button" onclick="convertbeijingtimetotimestamp()">北京时间转换成Unix时间戳</button>
+
+
+        <h3>编码转换</h3>
+        <p>Url: <textarea id="inputcode" style="width:500px; height:210px;" row="1"></textarea> </p>
+        <button type="button" onclick="encode()">UrlEncode编码</button>
+        <button type="button" onclick="decode()">UrlDecode解码</button>
+
+        <h1>TODO</h1>
+
+
+    </aside>
+    <section id="right">
+        <h1>查询结果: </h1>
+        <p id="result" style="word-wrap:break-word;"></p>
+    </section>
+</div>
+
+</body>
+</html>
