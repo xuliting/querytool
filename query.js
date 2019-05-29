@@ -25,27 +25,6 @@ const getfetch = (param) => {
         })
 }
 
-const getfetch_text = (param) => {
-    return fetch(param, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(response => {
-            console.log("getInfo response: " + JSON.stringify(response))
-
-            return JSON.stringify(response)
-
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-}
-
 const getelabalance = (elaaddress) => {
     var url = "https://api-wallet-ela.elastos.org/api/1/balance/" + elaaddress
     return getfetch(url)
