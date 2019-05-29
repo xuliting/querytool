@@ -69,8 +69,3 @@ const getheightdposvotehistory = (height) => {
     var url = "https://api-wallet-ela.elastos.org/api/1/dpos/rank/height/" + height
     return getfetch(url)
 }
-
-const getconvertbeijingtimetotimestamp = (beijingtime) => {
-    var oldTime = (new Date(beijingtime)).getTime() / 1000;
-    return getfetch(oldTime)
-}
