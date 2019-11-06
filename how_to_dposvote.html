@@ -93,8 +93,11 @@
             <div class="bounce3"></div>
         </div>
         <p v-if="!loading" style="text-align: center;font-size: 36px;margin: 80px">{{curLangule["key10"]}}</p>
-        <div v-if="!loading" class="four" v-on:click="goPay">
+        <div v-if="!loading" class="four" v-on:click="goPay('elaphant')">
             <p>{{curLangule["key9"]}}</p>
+        </div>
+        <div v-if="!loading" class="four" v-on:click="goPay('elastos')">
+            <p>{{curLangule["key11"]}}</p>
         </div>
     </div>
 </body>
@@ -104,11 +107,13 @@
         data: {
             loading: false,
             zh: {
-                key9: '去投票',
+                key9: '去投票（elaphant前缀）',
+                key11: '去投票（elastos前缀）',
                 key10: '怎么投票',
             },
             en: {
-                key9: 'Go to vote',
+                key9: 'Go to vote (elaphant prefix)',
+                key11: 'Go to vote (elastos prefix)',
                 key10: 'how_to_dposvote',
             },
             curLangule: {},
@@ -140,17 +145,23 @@
                     this.curLanguleKey = 'en';
                 }
             },
-            goPay() {
+            goPay(prefix) {
                 this.loading = true;
                 //构建支付协议
-                var url = this.buildElapay();
+                var url = this.buildElapay(prefix);
                 //拼接大象钱包过度页面
                 var turl = 'https://elephantwallet.app/redirect?appName=dposvote.h5.app&appTitle=dposvote.h5.app&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
                 //跳转
-                location.href = turl;
+                // location.href = turl; //当前界面跳转
+                window.open(turl);
             },
-            buildElapay() {
-                var url = "elaphant://eladposvote?";
+            buildElapay(prefix) {
+                var url;
+                if (prefix === 'elaphant') {
+                    url = "elaphant://eladposvote?";
+                } else {
+                    url = "elastos://eladposvote?";
+                }
                 _.forEach(this.schemeConfig, function(val, key, index) {
                     if (key === 'ReturnUrl') {
                         val = encodeURIComponent(val);
