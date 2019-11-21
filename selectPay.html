@@ -510,7 +510,7 @@
                 if (baseUrl === "file://") {
                     baseUrl = 'http://dev1.elapps.net';
                 }
-                this.schemeConfig['ReturnUrl'] = baseUrl + '/result.html';
+                this.schemeConfig['ReturnUrl'] = baseUrl + '/querytool/result.html';
                 _.forEach(this.schemeConfig, function(val, key, index) {
                     if (key === 'ReturnUrl' || key === 'CallbackUrl') {
                         val = encodeURIComponent(val);

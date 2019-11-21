@@ -121,7 +121,7 @@
                     baseUrl = 'http://dev1.elapps.net';
                 }
                 this.schemeConfig['RequestInfo'] = requestInfo;
-                this.schemeConfig['ReturnUrl'] = baseUrl + '/selectPay.html?exart=' + this.name;
+                this.schemeConfig['ReturnUrl'] = baseUrl + '/querytool/selectPay.html?exart=' + this.name;
                 var url = this.buildIdentity();
                 var turl = 'https://launch.elaphant.app?appName=elaphant.test&autoRedirect=True&appTitle=elaphant.test&redirectURL=' + encodeURIComponent(url);
                 location.href = turl;
