@@ -83,7 +83,7 @@
         el: '#app',
         data: {
             zh: {
-                title: '任意付',
+                title: '扫码付款',
             },
             en: {
                 title: 'Pay',
@@ -101,7 +101,7 @@
             toastText: "",
             toastShow: false,
             amount: '',
-            name: 'ELAAddress,BTCAddress,ETHAddress,USDT（ERC20）'
+            name: 'ELAAddress,BTCAddress,ETHAddress,USDT（ERC20）,ELA/ETHSC'
         },
         methods: {
             getUrl() {
@@ -111,7 +111,7 @@
             },
             clickQrcode() {
                 let requestInfo = "";
-                if (this.name.indexOf('USDT（ERC20）') > -1 && this.name.indexOf('ETHAddress') === -1) {
+                if ((this.name.indexOf('USDT（ERC20）') > -1 && this.name.indexOf('ETHAddress') === -1) || (this.name.indexOf('ELA/ETHSC') > -1 && this.name.indexOf('ETHAddress') === -1)) {
                     requestInfo = this.name + ',ETHAddress';
                 } else {
                     requestInfo = this.name;

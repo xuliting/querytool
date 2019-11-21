@@ -523,6 +523,8 @@
             createWallet() {
                 if (this.selectCoin === 'USDT（ERC20）') {
                     this.schemeConfig['CoinName'] = 'USDT-ERC20';
+                } else if (this.selectCoin === 'ELA/ETHSC') {
+                    this.schemeConfig['CoinName'] = 'ELA-ETHSC';
                 } else {
                     this.schemeConfig['CoinName'] = this.selectCoin;
                 }
@@ -609,6 +611,14 @@
                 let addressContent = data['BTCAddress'];
                 this.$set(this.codes, 'BTC', {
                     name: 'BTC',
+                    address: addressContent
+                });
+            }
+
+            if (exart.indexOf('ELA/ETHSC') > -1) {
+                let addressContent = data['ETHAddress'];
+                this.$set(this.codes, 'ELA/ETHSC', {
+                    name: 'ELA/ETHSC',
                     address: addressContent
                 });
             }
