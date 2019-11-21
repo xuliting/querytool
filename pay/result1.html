@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+</head>
+<style type="text/css">
+    body {
+        background: #F6F6F6;
+    }
+    
+    .three {
+        position: fixed;
+        width: 220px;
+        left: 0;
+        right: 0;
+        bottom: 34px;
+        height: 44px;
+        line-height: 44px;
+        background: #31AEFF;
+        border-radius: 200px;
+        margin: 0 auto;
+        z-index: 999;
+    }
+    
+    .three p {
+        font-family: Bio Sans;
+        font-size: 16px;
+        text-align: center;
+        color: #ffffff;
+    }
+    
+    .xiaoshuo {
+        cursor: pointer;
+    }
+    
+    .footer {
+        position: fixed;
+        width: 300px;
+        left: 0;
+        right: 0;
+        bottom: 10px;
+        height: 20px;
+        line-height: 20px;
+        background-color: #fff;
+        text-align: center;
+        color: #31AEFF;
+        margin: 0 auto;
+        z-index: 999;
+    }
+    
+    [v-cloak] {
+        display: none;
+    }
+</style>
+
+<body>
+    <div id="app" v-cloak>
+
+        <div style="margin-left:5px;margin-right:5px;margin-top: 100px;font-size: 16px;">
+            <div style="text-align: center;">{{curLangule['key']}}</div>
+        </div>
+
+        <div class="three">
+            <p @click="back">{{curLangule['key1']}}</p>
+        </div>
+
+        <div class="footer" v-if="curblock!=''">
+            <!-- {{dateFormat(new Date(this.curTime*1000), 'yyyy-MM-dd HH:mm')}}-->{{curLangule['key2']}}：{{curblock}}
+        </div>
+    </div>
+
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            zh: {
+                title: '结果',
+                key: '交易已发送，当下一个区块产生的时候就可以查看到。',
+                key1: '返回主页',
+                key2: '当前区块',
+            },
+            en: {
+                title: 'Result',
+                key: 'The transaction has been sent. You can see it when the next block is generated.',
+                key1: 'Back Home',
+                key2: 'Current Block',
+            },
+            curLangule: {},
+            txId: "",
+            toastText: "",
+            toastShow: false,
+            type: '',
+            curblock: ''
+        },
+        methods: {
+            getAjax(url) {
+                return new Promise((resovle, reject) => {
+                    $.ajax({
+                        url: url,
+                        dataType: 'json',
+                        type: 'GET',
+                        success: function(data) { //成功回调函数
+                            resovle(data);
+                        },
+                        error: function(err) { //失败回调函数
+                            reject(err);
+                        }
+                    });
+                });
+            },
+            getAjaxHeight() {
+                this.getAjax('https://idchain.elastos.org/api/v1/block/height').then((res) => {
+                    this.curblock = res[0].height;
+                }).catch(() => {
+
+                });
+            },
+            back() {
+                location.href = "./payIndex.html";
+            },
+            getLanugle: function() {
+                this.curLangule = this.en;
+                this.curLanguleKey = 'en';
+                var JsSrc = (navigator.language || navigator.browserLanguage).toLowerCase();
+                if (JsSrc.indexOf('zh') >= 0) {
+                    // 假如浏览器语言是中文
+                    this.curLanguleKey = 'zh';
+                    this.curLangule = this.zh;
+                } else if (JsSrc.indexOf('en') >= 0) {
+                    this.curLangule = this.en;
+                    this.curLanguleKey = 'en';
+                } else {
+                    // 假如浏览器语言是其它语言
+                    this.curLangule = this.en;
+                    this.curLanguleKey = 'en';
+                }
+            },
+            getUrlParam: function(name) {
+                //正则表达式过滤
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                //正则规则
+                var r = window.location.search.substr(1).match(reg);
+
+                if (r != null) return decodeURI(r[2]);
+                return null;
+            }
+        },
+        created: function() {
+            this.getAjaxHeight();
+            this.type = this.getUrlParam('type') || "";
+            this.txId = this.getUrlParam('txId') || "";
+            var hashList = localStorage.getItem('did-vote-sendTx-hashList') || "";
+            if (hashList === "") {
+                hashList = {};
+            } else {
+                hashList = JSON.parse(hashList);
+            }
+
+            var value = hashList[this.txId] || '';
+            if (this.txId != "" && value === '') {
+                hashList[this.txId] = {
+                    "txHash": this.txId,
+                    "createTime": parseInt((new Date().getTime() / 1000))
+                }
+                localStorage.setItem('did-vote-sendTx-hashList', JSON.stringify(hashList));
+            }
+
+            //localStorage.setItem('did-vote-sendTx-hashList', "");
+        },
+        mounted() {
+            this.getLanugle();
+            document.title = this.curLangule["title"];
+        }
+    });
+</script>
+
+</html>

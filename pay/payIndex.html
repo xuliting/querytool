@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/lodash.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+</head>
+<style type="text/css">
+    body {
+        background: #F2F9FF;
+    }
+
+    .xiaoshuo {
+        cursor: pointer;
+    }
+
+    .hang3 {
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    .hang3 span {
+        display: inline-block;
+        width: 232px;
+        height: 54px;
+        line-height: 54px;
+        background: #0070C8;
+        border: 1px solid #BDDBFF;
+        box-sizing: border-box;
+        border-radius: 5px;
+        text-align: center;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        color: #FFFFFF;
+    }
+
+    .toast {
+        position: fixed;
+        z-index: 2000;
+        left: 50%;
+        top: 25%;
+        transition: all .5s;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -o-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+        text-align: center;
+        border-radius: 5px;
+        color: #FFF;
+        background: rgba(17, 17, 17, 0.7);
+        height: 45px;
+        line-height: 45px;
+        padding: 0 15px;
+        width: 100%;
+    }
+
+    [v-cloak] {
+        display: none;
+    }
+</style>
+
+<body>
+    <div id="app" v-cloak>
+        <div style="height:50px"></div>
+        <div style="text-align: center;margin: 10px"><input placeholder="请输入要接收的币种" v-model="name" style="width: 300px;padding: 10px" /></div>
+        <div class="hang3" @click="clickQrcode">
+            <span>生成收款二维码</span>
+        </div>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            zh: {
+                title: '任意付',
+            },
+            en: {
+                title: 'Pay',
+            },
+            schemeConfig: {
+                "AppID": "cad35fbd008f13759c0ac43515a9dac73457449360d33634c77809ffe74ef12d11b31bbbd99e44e727320d03e31a2ff226e45e7627043d4ba4d7f560ab45a57b",
+                "AppName": "elaphant.test",
+                "RandomNumber": "123456789",
+                "DID": "iUh1Hwc76nMZ7JsEmkiQ8bcksFLFBC7s8k",
+                "PublicKey": "02e2316595b1cd017f1650bd8a70d5a7f90024a83efe3c5e8fa869dea995a9bd74",
+                "ReturnUrl": "",
+                "RequestInfo": ""
+            },
+            curLangule: {},
+            toastText: "",
+            toastShow: false,
+            amount: '',
+            name: 'ELAAddress,BTCAddress,ETHAddress,USDT（ERC20）'
+        },
+        methods: {
+            getUrl() {
+                //获取主机地址
+                var localhostPaht = window.location.protocol + "//" + window.location.host;
+                return localhostPaht;
+            },
+            clickQrcode() {
+                let requestInfo = "";
+                if (this.name.indexOf('USDT（ERC20）') > -1 && this.name.indexOf('ETHAddress') === -1) {
+                    requestInfo = this.name + ',ETHAddress';
+                } else {
+                    requestInfo = this.name;
+                }
+                let baseUrl = this.getUrl();
+                if (baseUrl === "file://") {
+                    baseUrl = 'http://dev1.elapps.net';
+                }
+                this.schemeConfig['RequestInfo'] = requestInfo;
+                this.schemeConfig['ReturnUrl'] = baseUrl + '/selectPay.html?exart=' + this.name;
+                var url = this.buildIdentity();
+                var turl = 'https://launch.elaphant.app?appName=elaphant.test&autoRedirect=True&appTitle=elaphant.test&redirectURL=' + encodeURIComponent(url);
+                location.href = turl;
+            },
+            buildIdentity() {
+                var url = "elaphant://identity?";
+                _.forEach(this.schemeConfig, function(val, key, index) {
+                    if (key === 'ReturnUrl' || key === 'CallbackUrl' || key === 'RequestInfo') {
+                        val = encodeURIComponent(val);
+                    }
+                    url += key + '=' + val + '&';
+                });
+
+                return url.substring(0, url.length - 1);
+            },
+            toast(str) {
+                var v = this;
+                v.toastText = str
+                v.toastShow = true
+                setTimeout(function() {
+                    v.toastShow = false;
+                }, 1500)
+            },
+            getLanugle: function() {
+                this.curLangule = this.en;
+                this.curLanguleKey = 'en';
+                var JsSrc = (navigator.language || navigator.browserLanguage).toLowerCase();
+                if (JsSrc.indexOf('zh') >= 0) {
+                    // 假如浏览器语言是中文
+                    this.curLanguleKey = 'zh';
+                    this.curLangule = this.zh;
+                } else if (JsSrc.indexOf('en') >= 0) {
+                    this.curLangule = this.en;
+                    this.curLanguleKey = 'en';
+                } else {
+                    // 假如浏览器语言是其它语言
+                    this.curLangule = this.en;
+                    this.curLanguleKey = 'en';
+                }
+            }
+        },
+        created: function() {
+
+        },
+        mounted() {
+            this.getLanugle();
+            document.title = this.curLangule["title"];
+        }
+    });
+</script>
+
+</html>
