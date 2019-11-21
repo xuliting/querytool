@@ -529,7 +529,7 @@
                 this.schemeConfig['ReceivingAddress'] = this.codes[this.selectCoin]['address'];
                 this.schemeConfig['Amount'] = this.coinNumber || 0;
                 let url = this.buildElapay();
-                var turl = 'https://launch.elaphant.app?appName=Vote For Me&autoRedirect=True&appTitle=Vote For Me&redirectURL=' + encodeURIComponent(url);
+                var turl = 'https://launch.elaphant.app?appName=elaphant.test&autoRedirect=True&appTitle=elaphant.test&redirectURL=' + encodeURIComponent(url);
                 location.href = turl;
             },
             GetQueryString(name) {　　　
