@@ -101,7 +101,7 @@
             toastText: "",
             toastShow: false,
             amount: '',
-            name: 'ELAAddress,BTCAddress,ETHAddress,USDT（ERC20）,ELA/ETHSC'
+            name: 'ELAAddress,ELAETHSCAddress,BTCAddress,ETHAddress,USDT（ERC20）'
         },
         methods: {
             getUrl() {
@@ -111,7 +111,7 @@
             },
             clickQrcode() {
                 let requestInfo = "";
-                if ((this.name.indexOf('USDT（ERC20）') > -1 && this.name.indexOf('ETHAddress') === -1) || (this.name.indexOf('ELA/ETHSC') > -1 && this.name.indexOf('ETHAddress') === -1)) {
+                if (this.name.indexOf('USDT（ERC20）') > -1 && this.name.indexOf('ETHAddress') === -1) {
                     requestInfo = this.name + ',ETHAddress';
                 } else {
                     requestInfo = this.name;

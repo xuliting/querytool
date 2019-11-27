@@ -451,7 +451,7 @@
             {{toastText}}
         </div>
 
-        <div class="walletname" style="height: 40px;">
+        <div class="walletname" style="height: 50px;">
             <select style="width: 100%;float: left;" v-model="selectCoin">
             <option :value ="key" v-for="(item,key) in codes">{{item.name}}</option>
           </select>
@@ -523,8 +523,8 @@
             createWallet() {
                 if (this.selectCoin === 'USDT（ERC20）') {
                     this.schemeConfig['CoinName'] = 'USDT-ERC20';
-                } else if (this.selectCoin === 'ELA/ETHSC') {
-                    this.schemeConfig['CoinName'] = 'ELAETHSC';
+                } else if (this.selectCoin === 'ELAETHSCAddress') {
+                    this.schemeConfig['CoinName'] = 'ELA/ETHSC';
                 } else {
                     this.schemeConfig['CoinName'] = this.selectCoin;
                 }
@@ -591,6 +591,14 @@
                 });
             }
 
+            if (exart.indexOf('ELAETHSCAddress') > -1) {
+                let addressContent = data['ETHAddress'];
+                this.$set(this.codes, 'ELA/ETHSC', {
+                    name: 'ELA/ETHSC',
+                    address: addressContent
+                });
+            }
+
             if (exart.indexOf('USDT（ERC20）') > -1) {
                 let addressContent = data['ETHAddress'];
                 this.$set(this.codes, 'USDT（ERC20）', {
@@ -611,14 +619,6 @@
                 let addressContent = data['BTCAddress'];
                 this.$set(this.codes, 'BTC', {
                     name: 'BTC',
-                    address: addressContent
-                });
-            }
-
-            if (exart.indexOf('ELA/ETHSC') > -1) {
-                let addressContent = data['ETHAddress'];
-                this.$set(this.codes, 'ELA/ETHSC', {
-                    name: 'ELA/ETHSC',
                     address: addressContent
                 });
             }
