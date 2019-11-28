@@ -30,6 +30,20 @@
         z-index: 999;
     }
 
+    .four {
+        position: fixed;
+        width: 220px;
+        left: 0;
+        right: 0;
+        bottom: 34px;
+        height: 44px;
+        line-height: 44px;
+        background: #31AEFF;
+        border-radius: 200px;
+        margin: 0 auto;
+        z-index: 999;
+    }
+
     .three p {
         font-family: Bio Sans;
         font-size: 16px;
@@ -71,7 +85,8 @@
         <div class="three">
             <p @click="back_test">{{curLangule['key1']}}</p>
         </div>
-        <div class="three">
+
+        <div class="four">
             <p @click="back_pay">{{curLangule['key3']}}</p>
         </div>
 
@@ -88,16 +103,16 @@
             zh: {
                 title: '结果',
                 key: '交易已发送，当下一个区块产生的时候就可以查看到。',
-                key1: '返回主页-test',
+                key1: '返回主页',
                 key2: '当前区块',
-                key3: '返回主页-付款',
+                key3: '继续收款',
             },
             en: {
                 title: 'Result',
                 key: 'The transaction has been sent. You can see it when the next block is generated.',
-                key1: 'Back Home - test',
+                key1: 'Back Home',
                 key2: 'Current Block',
-                key3: 'Back Home - pay',
+                key3: 'Continue Receiving',
             },
             curLangule: {},
             txId: "",
@@ -134,7 +149,7 @@
             },
             back_pay() {
             location.href = "./payIndex.html";
-        },
+            },
             getLanugle: function() {
                 this.curLangule = this.en;
                 this.curLanguleKey = 'en';
