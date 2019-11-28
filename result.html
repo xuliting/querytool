@@ -69,7 +69,10 @@
         </div>
 
         <div class="three">
-            <p @click="back">{{curLangule['key1']}}</p>
+            <p @click="back_test">{{curLangule['key1']}}</p>
+        </div>
+        <div class="three">
+            <p @click="back_pay">{{curLangule['key3']}}</p>
         </div>
 
         <div class="footer" v-if="curblock!=''">
@@ -85,14 +88,16 @@
             zh: {
                 title: '结果',
                 key: '交易已发送，当下一个区块产生的时候就可以查看到。',
-                key1: '返回主页',
+                key1: '返回主页-test',
                 key2: '当前区块',
+                key3: '返回主页-付款',
             },
             en: {
                 title: 'Result',
                 key: 'The transaction has been sent. You can see it when the next block is generated.',
-                key1: 'Back Home',
+                key1: 'Back Home - test',
                 key2: 'Current Block',
+                key3: 'Back Home - pay',
             },
             curLangule: {},
             txId: "",
@@ -124,9 +129,12 @@
 
                 });
             },
-            back() {
+            back_test() {
                 location.href = "./test.html";
             },
+            back_pay() {
+            location.href = "./payIndex.html";
+        },
             getLanugle: function() {
                 this.curLangule = this.en;
                 this.curLanguleKey = 'en';
