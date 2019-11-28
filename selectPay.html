@@ -524,7 +524,7 @@
                 if (this.selectCoin === 'USDT（ERC20）') {
                     this.schemeConfig['CoinName'] = 'USDT-ERC20';
                 } else if (this.selectCoin === 'ELAETHSCAddress') {
-                    this.schemeConfig['CoinName'] = 'ELAETHSC';
+                    this.schemeConfig['CoinName'] = 'ELA/ETHSC';
                 } else {
                     this.schemeConfig['CoinName'] = this.selectCoin;
                 }
@@ -593,8 +593,8 @@
 
             if (exart.indexOf('ELAETHSCAddress') > -1) {
                 let addressContent = data['ELAETHSCAddress'];
-                this.$set(this.codes, 'ELA/ETHSC', {
-                    name: 'ELA/ETHSC',
+                this.$set(this.codes, 'ELAETHSC', {
+                    name: 'ELAETHSC',
                     address: addressContent
                 });
             }
