@@ -461,7 +461,7 @@
         </div>
 
         <div class="four" v-on:click="createWallet">
-            <p>去收款</p>
+            <p>生成收款二维码</p>
         </div>
 
     </div>
@@ -593,16 +593,16 @@
 
             if (exart.indexOf('ELAETHSCAddress') > -1) {
                 let addressContent = data['ELAETHSCAddress'];
-                this.$set(this.codes, 'ELAETHSC', {
-                    name: 'ELAETHSC',
+                this.$set(this.codes, 'ELA/ETHSC', {
+                    name: 'ELA/ETHSC',
                     address: addressContent
                 });
             }
 
             if (exart.indexOf('USDT（ERC20）') > -1) {
                 let addressContent = data['ETHAddress'];
-                this.$set(this.codes, 'USDT（ERC20）', {
-                    name: 'USDT（ERC20）',
+                this.$set(this.codes, 'USDT-ERC20', {
+                    name: 'USDT-ERC20',
                     address: addressContent
                 });
             }
