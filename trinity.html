@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>elaphant-test</title>
+</head>
+
+<body>
+    <h1>1. github</h1>
+    <a href="https://github.com/elastos/Elastos.Trinity"> https://github.com/elastos/Elastos.Trinity </a>
+
+    <h1>2. doc</h1>
+    <a href="https://developer.elastos.org/elastos_trinity/"> https://developer.elastos.org/elastos_trinity/ </a>
+
+
+    <h1>3. dapp</h1>
+    <a href="https://www.getdapp.co/"> https://www.getdapp.co/ </a>
+
+    <h5>所有发布的 dapp</h5>
+    <h5>使用 safari或 chrome 打开，点击链接即可使用 elastOS 安装选中的 dapp</h5>
+
+    <h2>3.1 built in dapps</h2>
+    <h5>find the built in dapps in Elastos.Trinity/Dapps/Ionic</h5>
+    <a href="https://github.com/elastos/Elastos.Trinity.DApps.Launcher"> https://github.com/elastos/Elastos.Trinity.DApps.Launcher </a>
+    <br>
+    <a href="https://github.com/elastos/Elastos.Trinity.DApps.Wallet"> https://github.com/elastos/Elastos.Trinity.DApps.Wallet </a>
+    <br>
+    <a href="https://github.com/elastos/Elastos.Trinity.DApps.Friends"> https://github.com/elastos/Elastos.Trinity.DApps.Friends </a>
+    <br>
+    <a href="https://github.com/elastos/Elastos.Trinity.DApps.DID"> https://github.com/elastos/Elastos.Trinity.DApps.DID </a>
+    <br>
+    <a href="https://github.com/elastos/Elastos.Trinity.DApps.Settings"> https://github.com/elastos/Elastos.Trinity.DApps.Settings </a>
+    <br>
+    <a href="https://github.com/elastos/Elastos.Trinity.DApps.QRCodeScanner"> https://github.com/elastos/Elastos.Trinity.DApps.QRCodeScanner </a>
+    <br>
+
+    <h2>3.2 other dapps (developer by elastos)</h2>
+    <h5>search Dapp in https://github.com/elastos/</h5>
+
+    <h5>已发布的 dapp</h5>
+    <a href="https://github.com/elastos/Elastos.Trinity.DApps.DPoSVoting"> https://github.com/elastos/Elastos.Trinity.DApps.DPoSVoting </a>
+    <br>
+    <a href="https://github.com/elastos/Elastos.Trinity.DApps.Demo.DID"> https://github.com/elastos/Elastos.Trinity.DApps.Demo.DID (demo for sign, register profile ...) </a>
+    <br>
+    <a href="https://github.com/elastos/Elastos.Trinity.DApps.DAppsStore"> https://github.com/elastos/Elastos.Trinity.DApps.DAppsStore </a>
+    <br>
+    <a href="https://github.com/elastos/Elastos.Trinity.Dapps.ChainExplorer"> https://github.com/elastos/Elastos.Trinity.Dapps.ChainExplorer </a>
+    <br>
+    <a href="https://github.com/elastos/Elastos.Trinity.DApps.CRCouncilVoting"> https://github.com/elastos/Elastos.Trinity.DApps.CRCouncilVoting </a>
+    <br>
+    <a href="https://github.com/elastos/Elastos.Trinity.DApps.RedPacket"> https://github.com/elastos/Elastos.Trinity.DApps.RedPacket </a>
+    <br>
+    <a href="https://github.com/elastos/Elastos.Trinity.DApps.Demo.Carrier"> https://github.com/elastos/Elastos.Trinity.DApps.Demo.Carrier </a>
+    <br>
+    <a href="https://github.com/elastos/Elastos.Trinity.DApps.Demo.Hive"> https://github.com/elastos/Elastos.Trinity.DApps.Demo.Hive (to publish) </a>
+    <br>
+
+    <h3>3.2.1 链接格式（必须带参数，否则不执行 intent）</h3>
+        <a href="https://scheme.elastos.org/app?id=starfish.labs.elanodes"> https://scheme.elastos.org/app?id=starfish.labs.elanodes </a>
+
+    <h1>4. sign in</h1>
+        <a href="https://nucleusconsole.com"> https://nucleusconsole.com </a>
+        <br>
+        点击‘Login with Elastos DID’
+        <br>
+        使用 elastOS 扫描弹出的二维码，即可使用 DID 登录
+
+    <h1>5 Test before publish</h1>
+        <a href="https://github.com/elastos/Elastos.Trinity/blob/master/Tests/elastOS_pre_release_manual_test_cases.md"> https://github.com/elastos/Elastos.Trinity/blob/master/Tests/elastOS_pre_release_manual_test_cases.md </a>
+
+    <h1>6. Night build</h1>
+        <a href="https://github.com/elastos/Elastos.Trinity/releases"> https://github.com/elastos/Elastos.Trinity/releases </a>
+        <br>
+        若有更新，凌晨 travis 会自动编译apk，并上传到 github release（debug 版，带elastos签名）
+
+
+    <h1>7. Tools</h1>
+    <h2>7.1 trinity-cli</h2>
+    <h3>7.1.1 How to install this tool (for DApp developers)</h3>
+
+        ```
+        npm install -g @elastosfoundation/trinity-cli
+        ```
+
+    <h3>7.1.2 常用命令：</h3>
+
+        ```
+        trinity-cli run -p android
+        trinity-cli run -p ios
+        ```
+        <br>
+        <br>
+
+        默认是采用 url 启动方式，便于调试 ionic 代码
+        <br>
+        <br>
+
+        若须使用正常模式启动，请加上‘--nodebug’，如
+        <br>
+        <br>
+
+        ```
+        trinity-cli run -p android --nodebug
+        ```
+        <br>
+        <br>
+
+        若使用 release 版，请加上‘--prod’， 如
+        <br>
+        <br>
+
+        ```
+        trinity-cli run -p android --nodebug --prod
+        ```
+        <br>
+        <br>
+
+        more info:
+        <br>
+        <br>
+        <a href="https://github.com/elastos/Elastos.Trinity.ToolChains/tree/master/cli"> https://github.com/elastos/Elastos.Trinity.ToolChains/tree/master/cli </a>
+
+
+    <h2>7.2 trinity-types</h2>
+    <h3>7.2.1 How to install this tool (for DApp developers)</h3>
+
+        ```
+        npm install -g @elastosfoundation/trinity-types
+        ```
+        <br>
+
+    <h3>7.2.2 Types usage in TS DApps</h3>
+        eg.
+        <br>
+        <br>
+
+        import { AppManager } from '@elastosfoundation/trinity-types';
+
+</body>
+
+</html>
