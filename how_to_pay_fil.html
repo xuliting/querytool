@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>how_to_login_with_did</title>
+    <title>how_to_pay_fil</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script src="https://cdn.bootcss.com/lodash.js/4.17.12-pre/lodash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
@@ -93,10 +93,10 @@
             <div class="bounce3"></div>
         </div>
         <p v-if="!loading" style="text-align: center;font-size: 36px;margin: 80px">{{curLangule["key10"]}}</p>
-        <div v-if="!loading" class="four" v-on:click="goLogo('elaphant')">
+        <div v-if="!loading" class="four" v-on:click="goPay('elaphant')">
             <p>{{curLangule["key9"]}}</p>
         </div>
-        <div v-if="!loading" class="four" v-on:click="goLogo('elastos')">
+        <div v-if="!loading" class="four" v-on:click="goPay('elastos')">
             <p>{{curLangule["key11"]}}</p>
         </div>
     </div>
@@ -107,24 +107,27 @@
         data: {
             loading: false,
             zh: {
-                key9: '去登录（elaphant前缀）',
-                key11: '去登录（elastos前缀）',
-                key10: '怎么授权登录',
+                key9: '去支付（elaphant前缀）',
+                key11: '去支付（elastos前缀）',
+                key10: '怎么支付FIL',
             },
             en: {
-                key9: 'Go to login (elaphant prefix)',
-                key11: 'Go to login (elastos prefix)',
-                key10: 'How_to_login_with_did',
+                key9: 'Go to pay (elaphant prefix)',
+                key11: 'Go to pay (elastos prefix)',
+                key10: 'How_to_pay_FIL',
             },
             curLangule: {},
             schemeConfig: {
                 "AppID": "7d80c7e800f5842b3b8e7ec7318189f66b7fd5b6db13bb80fbd89d2b1c444772c1d0202fea1e9cbabbf3258b3d91685484c02c2ae52d78ca39e2e54593ec81dd",
                 "AppName": "Hackathon",
-                "RandomNumber": "123456789",
+                "Description": "test pay",
+                "OrderID": "99999999",
+                "CoinName": "FIL",
+                "Amount": 0.000011,
+                "ReceivingAddress": "f3wfjxjm5zw7zbvdejg3c4vlcr4dygnljn3y37tbegoivalgaropf2nonz2mjssn53rxj3n7bk5oj5vau6sapq",
                 "DID": "iXzenTELVRDc712tmt2Qvbtk3KcAwV2tU8",
                 "PublicKey": "032f6347b27401dc0bced2de0ab4531e62c496841cd8e67a58c572e3018dcb72d9",
-                "ReturnUrl": "http://baidu.com",
-                "RequestInfo": "elaaddress,ETHaddress,ELAETHSCAddress,FilaDDress,Email,Nickname"
+                "ReturnUrl": "http://bing.com",
             }
         },
         methods: {
@@ -145,22 +148,22 @@
                     this.curLanguleKey = 'en';
                 }
             },
-            goLogo(prefix) {
+            goPay(prefix) {
                 this.loading = true;
-                //构建身份授权协议
-                var url = this.buildIdentity(prefix);
+                //构建支付协议
+                var url = this.buildElapay(prefix);
                 //拼接大象钱包过度页面
                 var turl = 'https://elephantwallet.app/redirect?appName=Hackathon&appTitle=Hackathon&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
                 //跳转
                 // location.href = turl; //当前界面跳转
                 window.open(turl);
             },
-            buildIdentity(prefix) {
+            buildElapay(prefix) {
                 var url;
                 if (prefix === 'elaphant') {
-                    url = "elaphant://identity?";
+                    url = "elaphant://elapay?";
                 } else {
-                    url = "elastos://identity?";
+                    url = "elastos://elapay?";
                 }
                 _.forEach(this.schemeConfig, function(val, key, index) {
                     if (key === 'ReturnUrl') {
